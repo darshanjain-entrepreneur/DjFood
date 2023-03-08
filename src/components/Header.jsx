@@ -117,10 +117,20 @@ const login = async () => {
    
              {/* Mobile    */}
              <div className='flex items-center justify-between md:hidden w-full h-full '>
-             <Link to={"/"} className='flex items-center gap-2'>
+           
+
+          <div className='relative flex items-center justify-center'>
+            <BsFillBasket2Fill className='text-textColor text-2xl  cursor-pointer'/>
+            <div className=' absolute -top-2 -right-2  w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center'>
+             <p className='text-sm text-white font-semibold'>2</p>
+            </div>
+          </div>
+
+          <Link to={"/"} className='flex items-center gap-2'>
              <img src={Logo} alt="/" className='w-8 object-cover' />
              <p className='text-headingColor text-xl font-bold'>DjFood</p>
           </Link>
+
           <div className='relative'>
              <motion.img  whileTap={{scale:0.6}}
           className='w-10 min-w-[40px] h-10 min-h-[40px] rounded-full' src={user ? user.photoURL : Avatar} alt="/"
