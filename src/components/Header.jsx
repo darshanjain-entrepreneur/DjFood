@@ -97,7 +97,8 @@ const login = async () => {
                       <Link  to={"/createItem"}>
                        <p className='px-4 py-2 flex items-center bg-red-400
                    gap-3 cursor-pointer hover:bg-yellow-300 transition-all
-                   duration-100 ease-in-out text-textColor text-base' >Add Item <MdAddCircle/></p>
+                   duration-100 ease-in-out text-textColor text-base' 
+                   onClick={() => setIsMenu(false)} >Add Item <MdAddCircle/></p>
                       </Link>
                      )
                    }
@@ -159,13 +160,17 @@ const login = async () => {
           
 <ul className='flex flex-col   '>
             <li  className='text-base text-textColor hover:text-headingColor duration-100 
-            transition-all ease-in-out cursor-pointer px-4 py-2 hover:bg-red-300' >Home</li>
+            transition-all ease-in-out cursor-pointer px-4 py-2 hover:bg-red-300' 
+            onClick={() => setIsMenu(false)}>Home</li>
             <li  className='text-base text-textColor hover:text-headingColor duration-100 
-            transition-all ease-in-out cursor-pointer px-4 py-2 hover:bg-pink-300' >Food</li>
+            transition-all ease-in-out cursor-pointer px-4 py-2 hover:bg-pink-300' 
+            onClick={() => setIsMenu(false)}>Food</li>
             <li  className='text-base text-textColor hover:text-headingColor duration-100 
-            transition-all ease-in-out cursor-pointer px-4 py-2 hover:bg-yellow-300' >About Us</li>
+            transition-all ease-in-out cursor-pointer px-4 py-2 hover:bg-yellow-300'
+            onClick={() => setIsMenu(false)} >About Us</li>
             <li  className='text-base text-textColor hover:text-headingColor duration-100 
-            transition-all ease-in-out cursor-pointer px-4 py-2 hover:bg-purple-300' >Service</li>
+            transition-all ease-in-out cursor-pointer px-4 py-2 hover:bg-purple-300' 
+            onClick={() => setIsMenu(false)}>Service</li>
           </ul>
 
                    <p className='m-2 p-2 rounded-md shadow-md flex items-center bg-emerald-400
