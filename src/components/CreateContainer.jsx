@@ -7,6 +7,7 @@ import { categories } from '../utils/data'
 import Loader from './Loader'
 import {deleteObject, getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage'
 import { storage } from '../firebase.config'
+import { saveItem } from '../utils/FirebaseFunctions'
 
 const CreateContainer = () => {
 
@@ -75,8 +76,70 @@ const deleteImage = () => {
 }
 
 const saveDetails = () => {
+  setIsLoading(true);
+  try {
+   if(!title || !calories || !imageAsset || !price || !category){
+   
+    setFields(true)
+    setMsg('Required Fields are Empty!');
+    setAlertStatus('danger')
+    setTimeout(() => {
+      setFields(false)
+      setIsLoading(false)
+    }, 4000);
+
+   }else{
+
+    const data = {
+      id:`${Date.now()}`,
+      title:title ,
+      imageURL:imageAsset ,
+      category:category ,
+      calories:calories,
+      qty:1 ,
+      price:price
+    }
+    saveItem(data)
+    
+    setIsLoading(false);
+    setFields(true)
+
+    setMsg('Data Uploaded Successfully 😄')
+    clearData()
+    setAlertStatus('success')
+    setTimeout(() => {
+      setFields(false)
+      
+    }, 4000);
+   }
+
+    
+  } catch (error) {
+    console.log(error)
+    setFields(true)
+    setMsg('There is an Error : Try Again');
+    setAlertStatus('danger')
+    setTimeout(() => {
+      setFields(false)
+      setIsLoading(false)
+    }, 4000);
+  
+  }
 
 }
+
+
+const clearData = () => {
+setTitle("");
+setImageAsset(null);
+setCalories("");
+setPrice("");
+setCalories("Select Category");
+
+
+
+}
+
 
   return (
    <div className='w-full min-h-screen flex items-center justify-center'>
