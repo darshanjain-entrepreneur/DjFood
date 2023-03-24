@@ -7,7 +7,9 @@ import { categories } from '../utils/data'
 import Loader from './Loader'
 import {deleteObject, getDownloadURL, ref, uploadBytesResumable} from 'firebase/storage'
 import { storage } from '../firebase.config'
-import { saveItem } from '../utils/FirebaseFunctions'
+import { getAllFoodItems, saveItem } from '../utils/FirebaseFunctions'
+import { useStateValue } from '../context/StateProvider'
+import { actionType } from '../context/reducer'
 
 const CreateContainer = () => {
 
@@ -21,6 +23,7 @@ const [alertStatus , setAlertStatus] = useState("danger")
 const [msg , setMsg] = useState(null);
 const [isLoading  , setIsLoading] =useState(false)
 const [imageAsset , setImageAsset] = useState(null)
+const [{foodItems} , dispatch] = useStateValue()
 
 
 const uploadImage = (e) => {
@@ -111,6 +114,7 @@ const saveDetails = () => {
       setFields(false)
       
     }, 4000);
+
    }
 
     
@@ -125,7 +129,7 @@ const saveDetails = () => {
     }, 4000);
   
   }
-
+fetchData()
 }
 
 
@@ -138,6 +142,16 @@ setCalories("Select Category");
 
 
 
+}
+const fetchData = async () => {
+  await getAllFoodItems().then(data => {
+    
+dispatch({
+  type : actionType.SET_FOOD_ITEMS,
+foodItems: data
+})
+
+  })
 }
 
 
