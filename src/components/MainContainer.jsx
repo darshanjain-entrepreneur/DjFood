@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect, useRef  , useState} from 'react'
 import HomeContainer from './HomeContainer'
 import {motion} from "framer-motion"
 import {AiFillLeftCircle , AiFillRightCircle} from "react-icons/ai"
 import RowContainer from './RowContainer'
+import {useStateValue} from "../context/StateProvider"
+import MenuContainer from './MenuContainer'
 
 const MainContainer = () => {
+
+const [{foodItems} , dispatch] = useStateValue();
+
+
+const [scrollValue, setScrollValue] = useState(0)
+
+useEffect(() => {} , [scrollValue])
+
+
   return (
     <div  className='w-full h-auto flex flex-col items-center justify-center' >
       <HomeContainer/>
@@ -20,13 +31,20 @@ const MainContainer = () => {
 
          <div className='hidden md:flex gap-3 items-center'>
          <motion.div whileTap={{scale:0.75}} className='w-8 h-8  rounded-lg bg-emerald-400 hover:bg-emerald-600 cursor-pointer
-         transition-all duration-100 ease-in-out hover:shadow-lg flex items-center justify-center' > <AiFillLeftCircle className='text-lg text-white' /> </motion.div>
+          hover:shadow-lg flex items-center justify-center' 
+         onClick={() => setScrollValue(-300)}> <AiFillLeftCircle className='text-lg text-white' /> </motion.div>
          <motion.div whileTap={{scale:0.75}} className='w-8 h-8  rounded-lg bg-emerald-400 hover:bg-emerald-600 cursor-pointer
-         transition-all duration-100 ease-in-out hover:shadow-lg flex items-center justify-center' ><AiFillRightCircle className='text-lg text-white' /></motion.div>
+          hover:shadow-lg flex items-center justify-center'
+         onClick={() => setScrollValue(300)} ><AiFillRightCircle className='text-lg text-white' /></motion.div>
          </div>
         </div>
-        <RowContainer flag={true}/>
+        <RowContainer
+       scrollValue={scrollValue}
+        flag={true} data={foodItems?.filter(n => n.category === 'fruits')}/>
       </section>
+
+<MenuContainer/>
+      
       </div>
 
        
