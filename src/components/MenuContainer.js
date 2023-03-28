@@ -2,13 +2,14 @@ import React , {useEffect, useState} from 'react'
 import {IoFastFoodSharp} from "react-icons/io5"
 import {categories} from "../utils/data"
 import {motion} from "framer-motion"
-
+import RowContainer from "./RowContainer"
+import {useStateValue} from "../context/StateProvider"
 
 const MenuContainer = () => {
  
 const [filter, setFilter] = useState('paneer')
          
-
+const [{foodItems} , dispatch] = useStateValue()
 
   return (
    
@@ -41,14 +42,20 @@ const [filter, setFilter] = useState('paneer')
 
              ))}
               </div>
+
+              <div  className='w-full'>
+               <RowContainer flag={false} data={foodItems?.filter((n) => n.category === filter)}/>
               </div>
+
+
+              
 
               
 
 
 
                          
-             
+              </div>  
     </section>
   )
 }
